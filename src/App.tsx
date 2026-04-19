@@ -1,4 +1,5 @@
-import { useState, type ChangeEvent } from "react";
+import { useRef, useState, type ChangeEvent } from "react";
+import { toPng } from "html-to-image";
 import { IDCard } from "./IDCard";
 import type { IDData, IDTemplate } from "./types";
 
@@ -11,12 +12,17 @@ const initial: IDData = {
   validUntil: "2027-12-31",
   bloodGroup: "O+",
   phone: "+880 1712 345678",
+  address: "House 12, Road 4, Gulshan-1\nDhaka 1212, Bangladesh",
+  emergencyContact: "Md. Rahman · +880 1812 112233",
   photo: null,
   template: "employee",
 };
 
 export default function App() {
   const [data, setData] = useState<IDData>(initial);
+  const [side, setSide] = useState<"front" | "back">("front");
+  const [exporting, setExporting] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const update = <K extends keyof IDData>(key: K, value: IDData[K]) =>
     setData((prev) => ({ ...prev, [key]: value }));
@@ -30,6 +36,28 @@ export default function App() {
   };
 
   const reset = () => setData(initial);
+
+  const downloadPNG = async () => {
+    if (!cardRef.current) return;
+    setExporting(true);
+    try {
+      const dataUrl = await toPng(cardRef.current, {
+        pixelRatio: 3,
+        cacheBust: true,
+      });
+      const link = document.createElement("a");
+      const slug =
+        (data.fullName || "id-card")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "") || "id-card";
+      link.download = `${slug}-${side}.png`;
+      link.href = dataUrl;
+      link.click();
+    } finally {
+      setExporting(false);
+    }
+  };
 
   return (
     <div className="min-h-full">
@@ -54,10 +82,17 @@ export default function App() {
               Reset
             </button>
             <button
+              onClick={downloadPNG}
+              disabled={exporting}
+              className="px-3 py-1.5 text-sm rounded-md border border-slate-300 hover:bg-slate-50 disabled:opacity-60"
+            >
+              {exporting ? "Exporting…" : "Download PNG"}
+            </button>
+            <button
               onClick={() => window.print()}
               className="px-3 py-1.5 text-sm rounded-md bg-brand-600 text-white hover:bg-brand-700"
             >
-              Print / Save PDF
+              Print / PDF
             </button>
           </div>
         </div>
@@ -117,6 +152,18 @@ export default function App() {
               value={data.phone}
               onChange={(v) => update("phone", v)}
             />
+            <TextAreaField
+              className="sm:col-span-2"
+              label="Address"
+              value={data.address}
+              onChange={(v) => update("address", v)}
+            />
+            <TextField
+              className="sm:col-span-2"
+              label="Emergency contact"
+              value={data.emergencyContact}
+              onChange={(v) => update("emergencyContact", v)}
+            />
           </div>
 
           <div className="mt-6">
@@ -143,8 +190,25 @@ export default function App() {
           </div>
         </section>
 
-        <section className="flex justify-center items-start lg:sticky lg:top-8 self-start">
-          <IDCard data={data} />
+        <section className="flex flex-col items-center gap-4 lg:sticky lg:top-8 self-start">
+          <IDCard ref={cardRef} data={data} side={side} />
+
+          <div className="inline-flex rounded-md border border-slate-300 bg-white p-1 shadow-sm">
+            {(["front", "back"] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setSide(s)}
+                className={`px-4 py-1.5 text-xs font-medium rounded capitalize ${
+                  side === s
+                    ? "bg-slate-900 text-white"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
         </section>
       </main>
     </div>
@@ -156,14 +220,16 @@ function TextField({
   value,
   onChange,
   type = "text",
+  className = "",
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   type?: string;
+  className?: string;
 }) {
   return (
-    <label className="block">
+    <label className={`block ${className}`}>
       <span className="block text-xs font-medium text-slate-600 mb-1">
         {label}
       </span>
@@ -172,6 +238,32 @@ function TextField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+      />
+    </label>
+  );
+}
+
+function TextAreaField({
+  label,
+  value,
+  onChange,
+  className = "",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  className?: string;
+}) {
+  return (
+    <label className={`block ${className}`}>
+      <span className="block text-xs font-medium text-slate-600 mb-1">
+        {label}
+      </span>
+      <textarea
+        value={value}
+        rows={2}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
       />
     </label>
   );

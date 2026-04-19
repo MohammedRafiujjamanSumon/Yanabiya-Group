@@ -9,6 +9,8 @@ export interface IDData {
   validUntil: string;
   bloodGroup: string;
   phone: string;
+  address: string;
+  emergencyContact: string;
   photo: string | null;
   template: IDTemplate;
 }
