@@ -13,21 +13,21 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: "#eef7f2",
-          100: "#d6ebdf",
-          200: "#aed8c0",
-          300: "#7fbf9b",
-          400: "#4fa277",
-          500: "#2e855a",
-          600: "#1f6b48",
-          700: "#195239",
-          800: "#123a29",
-          900: "#0b231a",
+          50: "#eaf6ec",
+          100: "#cfe9d4",
+          200: "#a3d3ad",
+          300: "#73b984",
+          400: "#3f9a5a",
+          500: "#1e8040",
+          600: "#0f6431",
+          700: "#0a4a25",
+          800: "#073819",
+          900: "#04240f",
         },
-        gold: {
-          400: "#e0b85b",
-          500: "#c99a34",
-          600: "#a57c21",
+        lime: {
+          300: "#cdee47",
+          400: "#b6e02e",
+          500: "#9bcb20",
         },
         ink: {
           900: "#0a0f14",
@@ -37,16 +37,17 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["'Plus Jakarta Sans'", "Inter", "sans-serif"],
+        display: ["'Playfair Display'", "Georgia", "serif"],
+        ui: ["'Plus Jakarta Sans'", "Inter", "sans-serif"],
       },
       boxShadow: {
         soft: "0 10px 30px -10px rgba(12, 35, 26, 0.25)",
       },
       backgroundImage: {
-        "hero-radial":
-          "radial-gradient(1200px 600px at 20% 0%, rgba(79,162,119,0.25), transparent 60%), radial-gradient(800px 400px at 90% 20%, rgba(201,154,52,0.18), transparent 60%)",
+        "hero-green":
+          "radial-gradient(1100px 700px at 75% 50%, rgba(63,154,90,0.55), transparent 65%), linear-gradient(180deg, #073819 0%, #04240f 100%)",
         grid:
-          "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          "linear-gradient(rgba(205,238,71,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(205,238,71,0.10) 1px, transparent 1px)",
       },
       animation: {
         "fade-up": "fadeUp 0.8s ease-out both",

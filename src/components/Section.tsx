@@ -26,7 +26,11 @@ export default function Section({
     >
       <div className="container">
         <div className="max-w-3xl">
-          {eyebrow && <span className="eyebrow">{eyebrow}</span>}
+          {eyebrow && (
+            <span className={dark ? "eyebrow" : "eyebrow-light"}>
+              {eyebrow}
+            </span>
+          )}
           <h2
             className={`section-title mt-4 ${
               dark ? "text-white" : "text-ink-900"

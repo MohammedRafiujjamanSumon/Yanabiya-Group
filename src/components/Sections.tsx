@@ -83,7 +83,7 @@ export function Businesses() {
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {BUSINESSES.map(({ t, d, icon: Icon }) => (
           <div key={t} className="card group">
-            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-500 to-gold-500 text-white grid place-items-center">
+            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-500 to-lime-400 text-white grid place-items-center">
               <Icon size={22} />
             </div>
             <h3 className="mt-5 font-display text-lg font-bold">{t}</h3>
@@ -260,7 +260,7 @@ export function Leadership() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {leaders.map((p) => (
           <div key={p.n} className="card text-center">
-            <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-brand-400 to-gold-500 grid place-items-center text-white">
+            <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-brand-400 to-lime-400 grid place-items-center text-white">
               <Users size={34} />
             </div>
             <div className="mt-5 font-display font-bold">{p.n}</div>
@@ -291,7 +291,7 @@ export function Strategy() {
             key={x.t}
             className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
           >
-            <Lightbulb className="text-gold-400" />
+            <Lightbulb className="text-lime-300" />
             <div className="mt-4 font-display text-lg font-bold">{x.t}</div>
             <div className="mt-1 text-sm text-white/70">{x.d}</div>
           </div>
@@ -317,7 +317,7 @@ export function Insights() {
       <div className="grid gap-6 md:grid-cols-3">
         {posts.map((p) => (
           <a key={p.t} className="card group block">
-            <div className="aspect-[16/10] rounded-xl bg-gradient-to-br from-brand-200 to-gold-400/60" />
+            <div className="aspect-[16/10] rounded-xl bg-gradient-to-br from-brand-200 to-lime-300/60" />
             <div className="mt-5 inline-flex rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
               {p.tag}
             </div>

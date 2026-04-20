@@ -1,103 +1,97 @@
-import { ArrowRight, PlayCircle, Globe2, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+const STATS = [
+  { k: "4+", v: "Countries" },
+  { k: "6+", v: "Industries" },
+  { k: "15Y", v: "Experience" },
+  { k: "500+", v: "Clients" },
+];
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-ink-900 text-white"
+      className="relative overflow-hidden bg-hero-green text-white"
     >
-      <div className="absolute inset-0 bg-hero-radial" />
       <div
-        className="absolute inset-0 opacity-[0.08] bg-grid"
-        style={{ backgroundSize: "40px 40px" }}
+        className="absolute inset-0 opacity-60 bg-grid"
+        style={{ backgroundSize: "56px 56px" }}
       />
-      <div className="container relative pt-36 pb-24 md:pt-44 md:pb-32">
+
+      <div className="absolute right-[6%] top-1/2 hidden -translate-y-1/2 lg:block">
+        <div className="relative h-[420px] w-[340px] xl:h-[460px] xl:w-[380px] rounded-md border-2 border-lime-300/80" />
+      </div>
+
+      <div className="container relative pt-24 pb-28 md:pt-32 md:pb-36 lg:pt-40 lg:pb-44">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7 animate-fade-up">
-            <span className="eyebrow bg-white/10 border-white/10 text-white/80">
-              <Sparkles size={14} /> A Diversified Global Group
+            <span className="eyebrow">
+              <span className="h-px w-8 bg-lime-300" />
+              Welcome to Yanabiya Group
             </span>
-            <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05]">
-              Building a future of{" "}
-              <span className="bg-gradient-to-r from-brand-300 via-gold-400 to-gold-500 bg-clip-text text-transparent">
-                shared prosperity
-              </span>
-              .
+
+            <h1 className="mt-6 font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.05] text-white">
+              Built on Trust,
+              <br />
+              Driven by
+              <br />
+              Excellence
             </h1>
-            <p className="mt-6 max-w-2xl text-lg md:text-xl text-white/70">
-              Yanabiya Group unites diverse businesses, bold ideas, and global
-              partnerships to create enduring value for communities, customers,
-              and the planet.
+
+            <p className="mt-6 font-display italic text-2xl md:text-3xl text-lime-300">
+              A Global Group of Companies
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="#businesses" className="btn-primary">
-                Explore Our Businesses <ArrowRight size={18} />
+
+            <p className="mt-8 max-w-xl text-base md:text-lg text-white/80">
+              Yanabiya Group delivers innovative solutions across multiple
+              industries and continents — connecting Bangladesh, the United
+              Kingdom, Oman and the USA through technology, trade and talent.
+            </p>
+
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <a href="#businesses" className="btn-lime">
+                EXPLORE OUR WORK <ArrowRight size={18} />
               </a>
-              <a
-                href="#about"
-                className="btn border border-white/15 text-white hover:bg-white/10"
-              >
-                <PlayCircle size={18} /> Our Story
+              <a href="#contact" className="btn-outline-light">
+                GET IN TOUCH
               </a>
             </div>
+          </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-6 max-w-xl">
-              {[
-                { k: "25+", v: "Years of Legacy" },
-                { k: "12", v: "Countries" },
-                { k: "8", v: "Core Sectors" },
-              ].map((s) => (
-                <div key={s.v}>
-                  <div className="font-display text-3xl md:text-4xl font-extrabold text-white">
+          <div className="lg:col-span-5 lg:hidden">
+            <div className="grid grid-cols-2 gap-4 max-w-md">
+              {STATS.map((s) => (
+                <div
+                  key={s.v}
+                  className="rounded-md border border-lime-300/30 bg-white/[0.04] p-5 backdrop-blur"
+                >
+                  <div className="font-display text-4xl font-bold text-lime-300">
                     {s.k}
                   </div>
-                  <div className="text-xs uppercase tracking-wider text-white/60 mt-1">
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/70">
                     {s.v}
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </div>
 
-          <div className="lg:col-span-5 animate-fade-up [animation-delay:120ms]">
-            <div className="relative mx-auto max-w-md">
-              <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-brand-500/30 to-gold-500/30 blur-2xl" />
-              <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-500 to-gold-500" />
-                  <div>
-                    <div className="font-semibold">Yanabiya Index</div>
-                    <div className="text-xs text-white/60">
-                      Growth · Impact · Innovation
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-4">
-                  {[
-                    { k: "Revenue Growth", v: "+18.4%", c: "text-brand-300" },
-                    { k: "CSR Investment", v: "$42M", c: "text-gold-400" },
-                    { k: "Employees", v: "14,500+", c: "text-white" },
-                    { k: "Markets", v: "12 Countries", c: "text-white" },
-                  ].map((x) => (
-                    <div
-                      key={x.k}
-                      className="rounded-xl border border-white/10 bg-white/[0.02] p-4"
-                    >
-                      <div className="text-xs text-white/60">{x.k}</div>
-                      <div className={`mt-1 text-xl font-bold ${x.c}`}>
-                        {x.v}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 flex items-center gap-2 text-xs text-white/60">
-                  <Globe2 size={14} /> Aligned with UN Sustainable Development
-                  Goals
-                </div>
-              </div>
+      <div className="absolute right-[3%] top-1/2 hidden -translate-y-1/2 lg:flex flex-col gap-3 z-10">
+        {STATS.map((s) => (
+          <div
+            key={s.v}
+            className="w-44 rounded-sm border border-lime-300/20 bg-brand-900/40 px-5 py-4 backdrop-blur"
+          >
+            <div className="font-display text-3xl font-bold text-lime-300">
+              {s.k}
+            </div>
+            <div className="mt-1 text-[10px] uppercase tracking-[0.25em] text-white/70">
+              {s.v}
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );

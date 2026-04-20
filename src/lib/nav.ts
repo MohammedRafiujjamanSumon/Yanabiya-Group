@@ -15,3 +15,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Careers", href: "#careers" },
   { label: "Contact", href: "#contact" },
 ];
+
+export const PRIMARY_NAV: NavItem[] = NAV_ITEMS.slice(0, 7);
+export const MORE_NAV: NavItem[] = NAV_ITEMS.slice(7, 12);
